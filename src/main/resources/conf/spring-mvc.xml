@@ -12,11 +12,17 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="com.uban" />
 
-    <mvc:default-servlet-handler/>
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="foreachTag" value-ref="myTag" />
+            </map>
+        </property>
     </bean>
 
+    <mvc:resources mapping="/js/**" location="js/" cache-period="31556926"/>
+    <mvc:default-servlet-handler/>
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="prefix" value="" />
         <property name="suffix" value=".ftl"/>
